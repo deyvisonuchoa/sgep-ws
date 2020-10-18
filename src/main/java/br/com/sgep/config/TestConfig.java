@@ -2,6 +2,8 @@ package br.com.sgep.config;
 
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +19,9 @@ import br.com.sgep.repositories.SetorRepository;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner{
-
+	
+	static final Logger LOG = LoggerFactory.getLogger(TestConfig.class);
+	
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
@@ -44,6 +48,11 @@ public class TestConfig implements CommandLineRunner{
 		Funcionario f2 = new Funcionario(null, "lorena", "ribeiro", "11553944509", "bio123", "2142356", "quarta", 2, e2, s2);
 		
 		funcionarioRepository.saveAll(Arrays.asList(f1,f2));
+		
+		LOG.info("TESTE");
+		LOG.warn("TESTE");
+		LOG.error("TESTE");
+		LOG.debug("TESTE");
 		
 	}
 
