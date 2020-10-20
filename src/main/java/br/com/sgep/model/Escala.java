@@ -37,6 +37,20 @@ public class Escala implements Serializable{
 	
 	}
 
+	public Escala(Long id, String nomeEscala, LocalTime horaInicial, LocalTime horaFinal, LocalTime horaIntervalo,
+			Long limiteHorasBanco, Funcionario funcionario) {
+		super();
+		this.id = id;
+		this.nomeEscala = nomeEscala;
+		this.horaInicial = horaInicial;
+		this.horaFinal = horaFinal;
+		this.horaIntervalo = horaIntervalo;
+		this.limiteHorasBanco = limiteHorasBanco;
+		this.funcionario = funcionario;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -83,6 +97,14 @@ public class Escala implements Serializable{
 
 	public void setLimiteHorasBanco(Long limiteHorasBanco) {
 		this.limiteHorasBanco = limiteHorasBanco;
+	}	
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override

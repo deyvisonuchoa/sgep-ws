@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.sgep.entities.enums.Privilegio;
 
@@ -44,35 +44,38 @@ public class Funcionario implements Serializable {
 	
 	private String status;
 	
-	//private Long idGestor;
+	@ManyToOne
+	@JoinColumn(name = "id_gestor")
+	private Funcionario gestor;
 
 	// Associaçoes
 	
 	@ManyToOne
-	@JoinColumn(name = "idEmpresa")
+	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
 	
 	@ManyToOne
-	@JoinColumn(name = "idSetor")
+	@JoinColumn(name = "id_Setor")
 	private Setor setor;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "funcionario_situacao", 
-      joinColumns = 
-        { @JoinColumn(name = "id_funcionario", referencedColumnName = "id") },
-      inverseJoinColumns = 
-        { @JoinColumn(name = "id_situacao", referencedColumnName = "id") })
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private SituacaoFuncionario situacao;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "funcionario")
-	private List<Escala> escala = new ArrayList<>();
+	private List<Escala> escalas = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "funcionario")
+	private List<RegJornada> jornadas = new ArrayList<>();
 
 	public Funcionario() {
 
 	}	
 
 	public Funcionario(Long id, String nome, String sobrenome, String cpf, String senha, String matricula,
-			String diafolga, Integer privilegio, Empresa empresa, Setor setor) {
+			String diafolga, Integer privilegio, Empresa empresa, Setor setor, String email, String status) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -84,6 +87,8 @@ public class Funcionario implements Serializable {
 		this.privilegio = privilegio;
 		this.empresa = empresa;
 		this.setor = setor;
+		this.email = email;
+		this.status = status;
 	}
 	
 	public Long getId() {
@@ -172,6 +177,30 @@ public class Funcionario implements Serializable {
 
 	public Setor getSetor() {
 		return setor;
+	}
+
+	public SituacaoFuncionario getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoFuncionario situacao) {
+		this.situacao = situacao;
+	}
+
+	public List<Escala> getEscalas() {
+		return escalas;
+	}
+
+	public List<RegJornada> getJornadas() {
+		return jornadas;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
 
 	@Override

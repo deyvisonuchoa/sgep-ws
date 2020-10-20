@@ -4,13 +4,19 @@ import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "REG_JORNADA")
 public class RegJornada implements Serializable{
 	private static final long serialVersionUID = -7740398808666140333L;
 	
@@ -31,6 +37,13 @@ public class RegJornada implements Serializable{
 	private LocalTime horaBanco;
 	
 	private String observacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_funcionario")
+	private Funcionario funcionario;
+	
+	@OneToOne(mappedBy = "registro", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private AprvHrExtra aprovacao;
 	
 	public RegJornada() {
 		

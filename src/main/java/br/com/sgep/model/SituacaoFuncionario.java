@@ -3,6 +3,7 @@ package br.com.sgep.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "SITUACAO_FUNCIONARIO")
 public class SituacaoFuncionario implements Serializable{
 	private static final long serialVersionUID = -5771988520896067366L;
 
@@ -28,7 +31,8 @@ public class SituacaoFuncionario implements Serializable{
 	private Long diasAfastado;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "situacao")
+	@OneToOne
+	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
 	
 	public SituacaoFuncionario() {
