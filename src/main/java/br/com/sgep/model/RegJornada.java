@@ -48,6 +48,33 @@ public class RegJornada implements Serializable{
 	public RegJornada() {
 		
 	}
+	
+	
+
+	public RegJornada(Date data, LocalTime horaEntrada, Funcionario funcionario) {
+		super();
+		this.data = data;
+		this.horaEntrada = horaEntrada;
+		this.funcionario = funcionario;
+	}
+
+
+
+	public RegJornada(Long id, Date data, LocalTime horaEntrada, LocalTime horaSaida, LocalTime horaExtraNormal,
+			LocalTime horaExtraFeriado, LocalTime horaBanco, String observacao, Funcionario funcionario,
+			AprvHrExtra aprovacao) {
+		super();
+		this.id = id;
+		this.data = data;
+		this.horaEntrada = horaEntrada;
+		this.horaSaida = horaSaida;
+		this.horaExtraNormal = horaExtraNormal;
+		this.horaExtraFeriado = horaExtraFeriado;
+		this.horaBanco = horaBanco;
+		this.observacao = observacao;
+		this.funcionario = funcionario;
+		this.aprovacao = aprovacao;
+	}
 
 	public Long getId() {
 		return id;
@@ -111,6 +138,20 @@ public class RegJornada implements Serializable{
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	
+	
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public AprvHrExtra getAprovacao() {
+		return aprovacao;
 	}
 
 	@Override

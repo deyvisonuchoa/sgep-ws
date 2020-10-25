@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sgep.model.Setor;
-import br.com.sgep.service.SetorService;
+import br.com.sgep.service.SgepService;
 
 @RestController
 @RequestMapping(value = "/setor")
 public class SetorController {
 
 	@Autowired
-	public SetorService service;
+	public SgepService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Setor>> findAll(){
-		List<Setor> lista = service.findAll();
+	public ResponseEntity<List<Setor>> recuperaSetores(){
+		List<Setor> lista = service.recuperaSetores();
 		return ResponseEntity.ok().body(lista);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Setor> findById(@PathVariable Long id){
-		Setor obj = service.findById(id);
+	public ResponseEntity<Setor> recuperaSetorPorId(@PathVariable Long id){
+		Setor obj = service.recuperaSetorPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }

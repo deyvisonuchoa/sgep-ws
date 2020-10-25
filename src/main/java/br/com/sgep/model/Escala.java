@@ -2,14 +2,15 @@ package br.com.sgep.model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Escala implements Serializable{
@@ -27,18 +28,17 @@ public class Escala implements Serializable{
 
 	private LocalTime horaIntervalo;
 	
-	private Long limiteHorasBanco;
+	private int limiteHorasBanco;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_funcionario")
-	private Funcionario funcionario;
-	
+	@OneToMany(mappedBy = "escala")
+	private List<Funcionario> funcionarios = new ArrayList<>();
+
 	public Escala() {
 	
 	}
 
 	public Escala(Long id, String nomeEscala, LocalTime horaInicial, LocalTime horaFinal, LocalTime horaIntervalo,
-			Long limiteHorasBanco, Funcionario funcionario) {
+			int limiteHorasBanco) {
 		super();
 		this.id = id;
 		this.nomeEscala = nomeEscala;
@@ -46,7 +46,6 @@ public class Escala implements Serializable{
 		this.horaFinal = horaFinal;
 		this.horaIntervalo = horaIntervalo;
 		this.limiteHorasBanco = limiteHorasBanco;
-		this.funcionario = funcionario;
 	}
 
 
@@ -91,20 +90,16 @@ public class Escala implements Serializable{
 		this.horaIntervalo = horaIntervalo;
 	}
 
-	public Long getLimiteHorasBanco() {
+	public int getLimiteHorasBanco() {
 		return limiteHorasBanco;
 	}
 
-	public void setLimiteHorasBanco(Long limiteHorasBanco) {
+	public void setLimiteHorasBanco(int limiteHorasBanco) {
 		this.limiteHorasBanco = limiteHorasBanco;
 	}	
 
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
 	@Override

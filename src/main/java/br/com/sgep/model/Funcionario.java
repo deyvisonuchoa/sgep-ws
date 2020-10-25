@@ -63,8 +63,9 @@ public class Funcionario implements Serializable {
     private SituacaoFuncionario situacao;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "funcionario")
-	private List<Escala> escalas = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "id_escala")
+	private Escala escala ;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "funcionario")
@@ -75,7 +76,7 @@ public class Funcionario implements Serializable {
 	}	
 
 	public Funcionario(Long id, String nome, String sobrenome, String cpf, String senha, String matricula,
-			String diafolga, Integer privilegio, Empresa empresa, Setor setor, String email, String status) {
+			String diafolga, Integer privilegio, Empresa empresa, Setor setor, String email, String status, Escala escala) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -89,6 +90,7 @@ public class Funcionario implements Serializable {
 		this.setor = setor;
 		this.email = email;
 		this.status = status;
+		this.escala = escala;
 	}
 	
 	public Long getId() {
@@ -187,10 +189,6 @@ public class Funcionario implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public List<Escala> getEscalas() {
-		return escalas;
-	}
-
 	public List<RegJornada> getJornadas() {
 		return jornadas;
 	}
@@ -201,6 +199,14 @@ public class Funcionario implements Serializable {
 
 	public void setSetor(Setor setor) {
 		this.setor = setor;
+	}
+
+	public Escala getEscala() {
+		return escala;
+	}
+
+	public void setEscala(Escala escala) {
+		this.escala = escala;
 	}
 
 	@Override
@@ -239,5 +245,4 @@ public class Funcionario implements Serializable {
 			return false;
 		return true;
 	}
-
 }
