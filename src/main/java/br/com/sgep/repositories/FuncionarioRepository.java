@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.sgep.model.Funcionario;
-import br.com.sgep.service.VerificadorLoginDTO;
+import br.com.sgep.model.dto.VerificadorLoginDTO;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	

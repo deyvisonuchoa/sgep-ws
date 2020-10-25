@@ -1,4 +1,4 @@
-package br.com.sgep.service;
+package br.com.sgep.model.dto;
 
 import java.io.Serializable;
 
