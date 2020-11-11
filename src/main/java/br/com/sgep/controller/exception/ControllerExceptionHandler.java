@@ -1,6 +1,7 @@
 package br.com.sgep.controller.exception;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +19,7 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<StandardError> objectNotfoundException(ObjectNotFoundException e, HttpServletRequest request){
 		
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		String error = "Objeto não encontrado";
-		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		StandardError err = new StandardError(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	

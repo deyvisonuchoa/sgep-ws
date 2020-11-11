@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 public class LoginDTO implements Serializable{
 	
-	private String matricula;
+	private String email;
 	private String senha;	
 	
 	public LoginDTO() {		
 	}
 	
-	public String getMatricula() {
-		return matricula;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
+	public void setEmail(String matricula) {
+		this.email = matricula;
 	}
 
 	public String getSenha() {
