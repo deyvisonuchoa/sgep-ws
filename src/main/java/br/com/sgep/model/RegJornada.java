@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "REG_JORNADA")
 public class RegJornada implements Serializable{
 	private static final long serialVersionUID = -7740398808666140333L;
 	
