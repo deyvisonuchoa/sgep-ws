@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="AprvHrExtra")
 public class AprvHrExtra implements Serializable{
 	private static final long serialVersionUID = -3915817785989876501L;
 	

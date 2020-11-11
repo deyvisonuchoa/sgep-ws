@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Escalas")
 public class Escala implements Serializable{
 	private static final long serialVersionUID = -6854577051231769840L;
 

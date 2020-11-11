@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.sgep.entities.enums.Privilegio;
 
 @Entity
-@Table(name="Funcionario")
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
