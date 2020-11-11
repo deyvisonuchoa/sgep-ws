@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.sgep.service.exception.BusinessException;
 import br.com.sgep.service.exception.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -17,6 +18,14 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotfoundException(ObjectNotFoundException e, HttpServletRequest request){
+		
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError err = new StandardError(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<StandardError> BusinessException(BusinessException e, HttpServletRequest request){
 		
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());

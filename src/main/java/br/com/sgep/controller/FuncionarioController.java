@@ -20,6 +20,7 @@ import br.com.sgep.model.Funcionario;
 import br.com.sgep.model.RegJornada;
 import br.com.sgep.model.dto.LoginDTO;
 import br.com.sgep.service.SgepService;
+import br.com.sgep.service.exception.BusinessException;
 
 @RestController
 @RequestMapping(value = "/funcionario")
@@ -31,6 +32,9 @@ public class FuncionarioController {
 	@PostMapping(value = "/auth")
 	public ResponseEntity<Funcionario> autenticaLogin(@RequestBody LoginDTO form){
 		Funcionario funcionario = service.autenticaLogin(form);
+		if(funcionario == null)
+			throw new BusinessException("Email ou senha incorretos!");
+			
 		return ResponseEntity.ok().body(funcionario);
 	}
 	
