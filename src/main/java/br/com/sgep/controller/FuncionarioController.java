@@ -28,16 +28,7 @@ public class FuncionarioController {
 
 	@Autowired
 	public SgepService service;
-	
-	@PostMapping(value = "/auth")
-	public ResponseEntity<Funcionario> autenticaLogin(@RequestBody LoginDTO form){
-		Funcionario funcionario = service.autenticaLogin(form);
-		if(funcionario == null)
-			throw new BusinessException("Email ou senha incorretos!");
-			
-		return ResponseEntity.ok().body(funcionario);
-	}
-	
+		
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> recuperaFuncionarios(){
 		List<Funcionario> lista = service.recuperaFuncionarios(); 
