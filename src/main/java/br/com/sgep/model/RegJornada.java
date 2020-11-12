@@ -29,9 +29,7 @@ public class RegJornada implements Serializable{
 	
 	private LocalTime horaSaida;
 	
-	private LocalTime horaExtraNormal;
-	
-	private LocalTime horaExtraFeriado;
+	private LocalTime horaExtra;
 	
 	private LocalTime horaBanco;
 	
@@ -59,16 +57,15 @@ public class RegJornada implements Serializable{
 
 
 
-	public RegJornada(Long id, Date data, LocalTime horaEntrada, LocalTime horaSaida, LocalTime horaExtraNormal,
-			LocalTime horaExtraFeriado, LocalTime horaBanco, String observacao, Funcionario funcionario,
+	public RegJornada(Long id, Date data, LocalTime horaEntrada, LocalTime horaSaida, LocalTime horaExtra,
+			LocalTime horaBanco, String observacao, Funcionario funcionario,
 			AprvHrExtra aprovacao) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.horaEntrada = horaEntrada;
 		this.horaSaida = horaSaida;
-		this.horaExtraNormal = horaExtraNormal;
-		this.horaExtraFeriado = horaExtraFeriado;
+		this.horaExtra = horaExtra;
 		this.horaBanco = horaBanco;
 		this.observacao = observacao;
 		this.funcionario = funcionario;
@@ -107,20 +104,12 @@ public class RegJornada implements Serializable{
 		this.horaSaida = horaSaida;
 	}
 
-	public LocalTime getHoraExtraNormal() {
-		return horaExtraNormal;
+	public LocalTime getHoraExtra() {
+		return horaExtra;
 	}
 
-	public void setHoraExtraNormal(LocalTime horaExtraNormal) {
-		this.horaExtraNormal = horaExtraNormal;
-	}
-
-	public LocalTime getHoraExtraFeriado() {
-		return horaExtraFeriado;
-	}
-
-	public void setHoraExtraFeriado(LocalTime horaExtraFeriado) {
-		this.horaExtraFeriado = horaExtraFeriado;
+	public void setHoraExtra(LocalTime horaExtraNormal) {
+		this.horaExtra = horaExtraNormal;
 	}
 
 	public LocalTime getHoraBanco() {

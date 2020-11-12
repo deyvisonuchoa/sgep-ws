@@ -68,7 +68,7 @@ public class Instanciation implements CommandLineRunner{
 		
 		funcionarioRepository.saveAll(Arrays.asList(f1,f2,f3));		
 		
-		RegJornada registro1 = new RegJornada(null, new Date(), LocalTime.parse("09:34:40"), LocalTime.parse("16:34:40"), null, null, null, "observacao", f1, null);
+		//RegJornada registro1 = new RegJornada(null, new Date(), LocalTime.parse("09:34:40"), LocalTime.parse("16:34:40"), null, null, null, "observacao", f1, null);
 		
 		LOG.info("TESTE info");
 		LOG.warn("TESTE warn");
