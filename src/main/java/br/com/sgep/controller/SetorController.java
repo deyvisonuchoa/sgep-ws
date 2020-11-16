@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sgep.model.Setor;
 import br.com.sgep.service.SgepService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(tags = "Setor")
 @RestController
 @RequestMapping(value = "/setor")
 public class SetorController {
@@ -19,12 +22,14 @@ public class SetorController {
 	@Autowired
 	public SgepService service;
 	
+	@ApiOperation(value = "Recupera Lista de setores")
 	@GetMapping
 	public ResponseEntity<List<Setor>> recuperaSetores(){
 		List<Setor> lista = service.recuperaSetores();
 		return ResponseEntity.ok().body(lista);
 	}
 	
+	@ApiOperation(value = "Recupera Setor por Id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Setor> recuperaSetorPorId(@PathVariable Long id){
 		Setor obj = service.recuperaSetorPorId(id);

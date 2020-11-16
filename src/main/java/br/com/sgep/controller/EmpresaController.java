@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sgep.model.Empresa;
 import br.com.sgep.service.SgepService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "Empresa")
 
 @RestController
 @RequestMapping(value = "/empresa")
@@ -20,18 +24,21 @@ public class EmpresaController {
 	@Autowired
 	public SgepService service;
 	
+	@ApiOperation(value = "Recuperar lista de empresas")
 	@GetMapping
 	public ResponseEntity<List<Empresa>> recuperaEmpresas(){
 		List<Empresa> lista = service.recuperaEmpresas(); 
 		return ResponseEntity.ok().body(lista);
 	}
 	
+	@ApiOperation(value = "Recuperar empresa por id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Empresa> recuperaEmpresaPorId(@PathVariable Long id){
 		Empresa obj = service.recuperaEmpresaPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value = "Remover empresa")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Empresa> removeEmpresa(@PathVariable Long id){
 		service.removeEmpresa(id);

@@ -21,7 +21,10 @@ import br.com.sgep.model.RegJornada;
 import br.com.sgep.model.dto.LoginDTO;
 import br.com.sgep.service.SgepService;
 import br.com.sgep.service.exception.BusinessException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(tags = "Funcionario")
 @RestController
 @RequestMapping(value = "/funcionario")
 public class FuncionarioController {
@@ -29,18 +32,21 @@ public class FuncionarioController {
 	@Autowired
 	public SgepService service;
 	
+	@ApiOperation(value = "Recuperar lista de fuincionarios")
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> recuperaFuncionarios(){
 		List<Funcionario> lista = service.recuperaFuncionarios(); 
 		return ResponseEntity.ok().body(lista);
 	}
 	
+	@ApiOperation(value = "Recuperar funcionario por ID")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Funcionario> recuperaFuncionarioPorId(@PathVariable Long id){
 		Funcionario obj = service.recuperaFuncionarioPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value = "Cadastrar funcionario")
 	@PostMapping
 	public ResponseEntity<Funcionario> cadastrarFuncionario(@RequestBody Funcionario obj){
 		obj = service.cadastrarFuncionario(obj);
@@ -50,27 +56,31 @@ public class FuncionarioController {
 		
 	}
 	
+	@ApiOperation(value = "Remover Funcionario")
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> removeFuncionario(@PathVariable Long id) {
 		service.removeFuncionario(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value = "Atualizar Funcionario")
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Funcionario> atualizaFuncionario(@PathVariable Long id, @RequestBody Funcionario obj){
 		obj = service.atualizaFuncionario(id, obj);	
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PostMapping(value = "/jornada")
-	public ResponseEntity<RegJornada> lancarEntrada(@RequestBody Funcionario funcionario){
-		RegJornada registro = service.lancarEntrada(funcionario.getId());
+	@ApiOperation(value = "Lançar Entrada")
+	@PostMapping(value = "/{id}/jornada")
+	public ResponseEntity<RegJornada> lancarEntrada(@PathVariable Long id){
+		RegJornada registro = service.lancarEntrada(id);
 		return ResponseEntity.ok().body(registro);
 	}
 	
-	@PutMapping(value = "/jornada")
-	public ResponseEntity<RegJornada> lancarSaida(@RequestBody Funcionario funcionario){
-		RegJornada registro = service.lancarSaida(funcionario.getId());
+	@ApiOperation(value = "Lançar Saida")
+	@PutMapping(value = "/{id}/jornada")
+	public ResponseEntity<RegJornada> lancarSaida(@PathVariable Long id){
+		RegJornada registro = service.lancarSaida(id);
 		return ResponseEntity.ok().body(registro);
 	}
 	
