@@ -224,4 +224,9 @@ public class SgepService {
 		entity.setLimiteHorasBanco(obj.getLimiteHorasBanco());
 	}
 
+	public List<RegJornada> recuperaEntradas(Long id) {		
+		List<RegJornada> lista = registroRepo.findAllByFuncionario(id);
+		return lista;
+	}
+
 }
