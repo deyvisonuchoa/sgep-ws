@@ -15,15 +15,16 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "Login")
 @RestController
-public class AuthController {
+public class LoginController {
 
 	@Autowired
 	SgepService service;
 
 	@ApiOperation(value = "tela de login")
 	@PostMapping(value = "/login")
-	public ResponseEntity<Funcionario> autenticaLogin(@RequestBody LoginDTO form){
-		Funcionario funcionario = service.autenticaLogin(form);
+	public ResponseEntity<Funcionario> autenticaLogin(@RequestBody LoginDTO loginForm){
+		Funcionario funcionario = service.autenticaLogin(loginForm);
+		
 		if(funcionario == null)
 			throw new BusinessException("Email ou senha incorretos!");
 
