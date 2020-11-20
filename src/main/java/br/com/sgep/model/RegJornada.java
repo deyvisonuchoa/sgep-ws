@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class RegJornada implements Serializable{
 	private static final long serialVersionUID = -7740398808666140333L;
@@ -35,11 +37,12 @@ public class RegJornada implements Serializable{
 	
 	private String observacao;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
 	
-	@OneToOne(mappedBy = "registro", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "registro", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
 	private AprvHrExtra aprovacao;
 	
 	public RegJornada() {
