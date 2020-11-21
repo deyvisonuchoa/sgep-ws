@@ -1,7 +1,9 @@
 package br.com.sgep.controller;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,9 +57,11 @@ public class FuncionarioController {
 	
 	@ApiOperation(value = "Remover Funcionario")
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<Void> removeFuncionario(@PathVariable Long id) {
+	public ResponseEntity<Map<Object,Object>> removeFuncionario(@PathVariable Long id) {
 		service.removeFuncionario(id);
-		return ResponseEntity.noContent().build();
+		Map<Object,Object> msgSucesso = new HashMap<>();
+		msgSucesso.put("msg", "sucesso");
+		return ResponseEntity.ok().body(msgSucesso);
 	}
 	
 	@ApiOperation(value = "Atualizar Funcionario")
