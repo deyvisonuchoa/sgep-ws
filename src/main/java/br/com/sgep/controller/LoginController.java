@@ -24,10 +24,6 @@ public class LoginController {
 	@PostMapping(value = "/login")
 	public ResponseEntity<Funcionario> autenticaLogin(@RequestBody LoginDTO loginForm){
 		Funcionario funcionario = service.autenticaLogin(loginForm);
-		
-		if(funcionario == null)
-			throw new BusinessException("Email ou senha incorretos!");
-
 		return ResponseEntity.ok().body(funcionario);
 	}
 
