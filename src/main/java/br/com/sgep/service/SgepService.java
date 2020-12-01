@@ -126,11 +126,36 @@ public class SgepService {
 		
 		if((ultimoRegistro == null) || (ultimoRegistro.getHoraSaida() != null)) {
 			throw new BusinessException("Não existe lançamento para ser fechado ");
-		}
-		
+		}		
 		ultimoRegistro.setHoraSaida(LocalTime.now());
 		
+		verificaHoraExtra(ultimoRegistro);
+		
 		return registroRepo.save(ultimoRegistro);
+	}
+
+	private void verificaHoraExtra(RegJornada ultimoRegistro) {
+		
+		final LocalTime tempoJornada = LocalTime.parse("09:00:00");
+		
+		Long horaEntrada = ultimoRegistro.getHoraEntrada().toNanoOfDay();
+		Long horaSaida = ultimoRegistro.getHoraSaida().toNanoOfDay();
+		
+//		Long entradaMock = LocalTime.parse("08:30:00").toNanoOfDay();
+//		Long saidaMock = LocalTime.parse("18:30:00").toNanoOfDay();
+		
+		Long diferencaHora = horaSaida - horaEntrada;
+		
+		LocalTime horaExpediente = LocalTime.ofNanoOfDay(diferencaHora);
+		
+		if(horaExpediente.compareTo(tempoJornada) > 0) {
+			Long h1 = horaExpediente.toNanoOfDay();
+			Long h2 = tempoJornada.toNanoOfDay();
+			
+			LocalTime horaExtra = LocalTime.ofNanoOfDay(h1 - h2);
+			
+			ultimoRegistro.setHoraExtra(horaExtra);
+		}
 	}
 
 	// Empresa

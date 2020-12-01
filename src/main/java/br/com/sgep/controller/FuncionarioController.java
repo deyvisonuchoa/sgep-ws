@@ -85,7 +85,7 @@ public class FuncionarioController {
 		return ResponseEntity.ok().body(registro);
 	}
 	
-	@ApiOperation(value = "Recupera Lançamentos")
+	@ApiOperation(value = "Recupera Lançamentos de entrada e saida")
 	@GetMapping(value = "/{id}/lancamentos")
 	public ResponseEntity<List<RegJornada>> recuperarLancamentos(@PathVariable Long id){
 		List<RegJornada> listaRegistros = service.recuperaEntradas(id);
