@@ -1,6 +1,7 @@
 package br.com.sgep.service;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -115,7 +116,7 @@ public class SgepService {
 		if(ultimoRegistro.getHoraSaida() == null)
 			throw new BusinessException("O ultimo lancamento não foi fechado ");
 		
-		RegJornada novoRegistro = new RegJornada(new Date(), LocalTime.now(), recuperaFuncionarioPorId(id));
+		RegJornada novoRegistro = new RegJornada(new Date(), LocalTime.now(ZoneId.systemDefault()), recuperaFuncionarioPorId(id));
 		
 		return registroRepo.save(novoRegistro);
 	}
@@ -205,6 +206,20 @@ public class SgepService {
 	public Setor recuperaSetorPorId(Long id) {
 		Setor obj = setorRepo.findById(id).get();
 		return obj;
+	}
+	
+	public Setor cadastraSetor(Setor obj) {
+		return setorRepo.save(obj);
+	}
+
+	public void removeSetor(Long id) {
+		try {
+			setorRepo.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ObjectNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 
 	// Escala
